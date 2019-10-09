@@ -21,3 +21,6 @@ A description of tests that will be performed by the automated test suite
 
 **Manual Tests**
 List of manual tests that will be required over the automated tests
+
+**Related Feature Requests**
+Add the related feature requests here if they exist. (You can do this by just placing the hashtag followed by the issue number)

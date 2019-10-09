@@ -2,7 +2,7 @@
 name: Feature request ✨
 about: Suggest an idea for this project
 title: "[FEATURE]: Some awesome idea!"
-labels: ''
+labels: review
 assignees: Moro-Code
 
 ---

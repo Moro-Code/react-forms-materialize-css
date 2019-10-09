@@ -2,8 +2,8 @@
 name: "Bug report \U0001F41E"
 about: Create a report to help us improve
 title: "[BUG] Something is not right!"
-labels: ''
-assignees: ''
+labels: review
+assignees: Moro-Code
 
 ---
 
