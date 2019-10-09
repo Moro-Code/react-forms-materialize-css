@@ -157,7 +157,7 @@ You now have a working form! Adding, altering or removing fields only requires t
 
 ## Contributing
 
-This is a fairly simple project so if you are new to react like me, would like to help and don't know where to start, please feel free to contact me. I will also be opening up a series of issues for what I would like to develop. 
+This is a fairly simple project so if you are new to react like me, would like to help and don't know where to start, please feel free to contact me. I will also be opening up a series of issues for what needs to be developed if you want to open a PR.
 
 📬 [omar@omarnasr.ca](mailto:omar@omarnasr.ca)
 🐦 [@thenextmusk](https://twiter.com/thenextmusk)
