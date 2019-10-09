@@ -122,11 +122,13 @@ function App () {
             /* values for the fields will have "Value" appended 
                to their state variable
             */ 
-            if (item.indexOf["Value"] !== -1) {
-                data[item.split["value"][0]] = this.state[item]
+            if (item.indexOf("Value") !== -1) {
+                data[item.split("Value")[0]] = this.state[item]
+                console.log(item)
             }
         }
         console.log(data)
+        event.preventDefault()
     }
 
     /* we're going to also define a function handle onChange events. Each individual field can be assigned a seperate handler or none at all */
@@ -137,7 +139,7 @@ function App () {
     }
     return (
         <Form formDataFileName="signup.json" classNames={["s12"]}
-              onSubmitFunc = {handleChange} onChangeFuncs ={{firstName: handleChange}}>
+              onSubmitFunc = {handleSubmit} onChangeFuncs ={{firstName: handleChange}}>
         </Form>
     )
 }
