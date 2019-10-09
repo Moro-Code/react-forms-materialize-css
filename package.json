@@ -1,6 +1,6 @@
 {
   "name": "react-forms-materialize-css",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple dynamic react form component which uses json to render a form with material css styling.",
   "author": "Moro-Code",
   "license": "MIT",
