@@ -16,7 +16,7 @@ Using react-forms-materialize-css is easy (not baised at all 😏)!
 
 ## Prequesites ✋
 
-- You obviously need to make sure that you're using react ^15.0.0 or ^16.0.0.
+- You need to make sure that you're using react ^15.0.0 or ^16.0.0.
 - You will need to install materialize-css and load the material icons resource in the head element of your index.html file. You will also have to install the materialize-css npm module
 
 ```html
@@ -27,7 +27,7 @@ Using react-forms-materialize-css is easy (not baised at all 😏)!
 
 The react-forms-materialize-css ingests the form JSON and dynamically generates fields and their state variables in the form component. Currently you must find a way to serve this JSON file and this must be served under a /forms route. If you are using create-react-app this is fairly easy just add the json file in a forms folder under the public folder i.e. public > forms > [form-name].json . 
 
-Alright! Let's create a simple sign-up form asking for the first name, last name, email, password and an about you free text field. We will also add a submit button so that we can submit this form ( why else would you add a submit button ). We will see how we can add custom handlers in Step #2
+Alright! Let's create a simple sign-up form asking for the first name, last name, email, password and an about you free text field. We will also add a submit button. We will see how we can add custom handlers for onChange and onSubmit events in Step 2. 
 
 ```json 
 [
@@ -150,6 +150,17 @@ export default App;
 ## Step 3 (Start our application) 🏁
 
 ![itworks](/docs/gifs/itworks.gif)
+
+
+You now have a working form! Adding, altering or removing fields only requires the changing of the form JSON. 
+
+
+## Contributing
+
+This is a fairly simple project so if you are new to react like me, would like to help and don't know where to start, please feel free to contact me. I will also be opening up a series of issues for what I would like to develop. 
+
+📬 [omar@omarnasr.ca](mailto:omar@omarnasr.ca)
+🐦 [@thenextmusk](https://twiter.com/thenextmusk)
 
 
 ## License
