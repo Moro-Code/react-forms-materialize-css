@@ -14,7 +14,7 @@ npm install --save react-forms-materialize-css
 
 Using react-forms-materialize-css is easy (not baised at all 😏)!
 
-### Prequesites ✋
+## Prequesites ✋
 
 - You obviously need to make sure that you're using react ^15.0.0 or ^16.0.0.
 - You will need to install materialize-css and load the material icons resource in the head element of your index.html file. You will also have to install the materialize-css npm module
@@ -23,7 +23,7 @@ Using react-forms-materialize-css is easy (not baised at all 😏)!
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
 
-### Step 1 (Defining our form JSON) 🏃
+## Step 1 (Defining our form JSON) 🏃
 
 The react-forms-materialize-css ingests the form JSON and dynamically generates fields and their state variables in the form component. Currently you must find a way to serve this JSON file and this must be served under a /forms route. If you are using create-react-app this is fairly easy just add the json file in a forms folder under the public folder i.e. public > forms > [form-name].json . 
 
@@ -102,7 +102,7 @@ Now we add this form JSON to our forms folder or where this file can be served u
 ![signupform](/docs/images/signupform.png)
 
 
-# Step 2 (Adding our component to our app) 🏃
+## Step 2 (Adding our component to our app) 🏃
 
 Now we just need to add our form component
 
@@ -145,8 +145,7 @@ function App () {
 export default App;
 ```
 
-
-Now we just fire 🔥 up our app ! 
+## Step 3 (Start our application) 🏁
 
 ![itworks](/docs/gifs/itworks.gif)
 
