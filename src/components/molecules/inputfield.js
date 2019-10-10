@@ -4,6 +4,10 @@ import TextArea from "../atoms/textarea";
 import Icon from "../atoms/icon";
 import InputLabel from "../atoms/inputlabel";
 import HelperText from "../atoms/helpertext";
+/*
+TODO:
+- restructure such that multiple components can be added not just text input and area
+*/
 class InputField extends Component{
     constructor(props){
         super(props)
