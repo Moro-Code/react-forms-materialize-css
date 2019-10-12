@@ -40,17 +40,21 @@ class SelectField extends Component{
     
     render(){
 
-        if (this.props.multiple === false){ 
+        if (this.props.multi === false){ 
             return (
                 <select {...this.elementProps} 
-                        onChange = {this.props.onChange}>
+                        onChange = {this.props.onChange}
+                        disabled = {this.props.disabled}>
                     {this.renderOptions()}
                 </select>
             )
         }
-        else if (this.props.multiple === true){
+        else if (this.props.multi === true){
             return (
-                <select multiple {...this.elementProps}>
+                <select 
+                    multiple {...this.elementProps}
+                    disabled = {this.props.disabled}
+                >
                     {this.renderOptions()}
                 </select>
             )
@@ -59,7 +63,7 @@ class SelectField extends Component{
 }
 
 SelectField.defaultProps = {
-    multiple: false
+    multi: false
 }
 
 SelectField.propTypes = {

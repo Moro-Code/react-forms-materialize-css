@@ -68,9 +68,24 @@ class InputField extends Component{
             )
         }
         else if (this.props.selectFieldProps){
-            // need to preprocess the data for cleanliness 
-            let selectFieldProps = this.props.selectFieldProps
-            let options = this.props.selectFieldProps["values"]
+            //  remove placeholder
+            // not a valid select element html protocol
+            let placeholder = this.props.selectFieldProps["placeholder"]
+            let defaultValue = this.props.selectFieldProps["default"]
+
+            delete this.props.selectFieldProps["placeholder"]
+            delete this.props.selectFieldProps["default"]
+            return (
+                <SelectField elementProps = {this.props.selectFieldProps}
+                             disabled = {this.props.disabled}
+                             options = {this.props.options}
+                             default = {defaultValue}
+                             placeholder =  {placeholder}
+                            >
+                    
+                </SelectField>
+            )
+            
         }
         throw new Error("textAreaProps nor textFieldProps provided")
     }
@@ -115,7 +130,15 @@ InputField.propTypes = {
     textAreaProps: PropTypes.object,
     textFieldProps: PropTypes.object,
     SelectFieldProps: PropTypes.object,
-    classNames: PropTypes.arrayOf(PropTypes.string)
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    options: PropTypes.string,
+    icon: PropTypes.string,
+    classNames: PropTypes.string,
+    labelText: PropTypes.string,
+    helperTextText: PropTypes.string,
+    dataSuccess: PropTypes.string,
+    dataError: PropTypes.string,
+    default: PropTypes.string
 }
 
 
