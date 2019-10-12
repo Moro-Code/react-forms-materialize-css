@@ -1,9 +1,11 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 import TextField from "../atoms/textfield";
 import TextArea from "../atoms/textarea";
 import Icon from "../atoms/icon";
 import InputLabel from "../atoms/inputlabel";
 import HelperText from "../atoms/helpertext";
+import SelectField from "../atoms/selectfield";
 /*
 TODO:
 - restructure such that multiple components can be added not just text input and area
@@ -11,7 +13,7 @@ TODO:
 class InputField extends Component{
     constructor(props){
         super(props)
-        this.renderTextFieldOrArea = this.renderTextFieldOrArea.bind(this)
+        this.renderFields = this.renderFields.bind(this)
         this.getClassNames = this.getClassNames.bind(this)
         this.renderIcon = this.renderIcon.bind(this)
         this.renderInputLabel = this.renderInputLabel.bind(this)
@@ -45,7 +47,7 @@ class InputField extends Component{
 
     }
 
-    renderTextFieldOrArea(){
+    renderFields(){
         // conditional rendering function of either a TextArea component or a TextField component based on the textAreaProps or textFieldProps
         if (this.props.textAreaProps){
             return (
@@ -64,6 +66,11 @@ class InputField extends Component{
                                onChange = {this.props.onChange}>
                 </TextField>
             )
+        }
+        else if (this.props.selectFieldProps){
+            // need to preprocess the data for cleanliness 
+            let selectFieldProps = this.props.selectFieldProps
+            let options = this.props.selectFieldProps["values"]
         }
         throw new Error("textAreaProps nor textFieldProps provided")
     }
@@ -95,7 +102,7 @@ class InputField extends Component{
         return (
             <div className = {`col input-field${this.getClassNames !== ''? ' ' + this.getClassNames(): this.getClassNames()}`}>
                 { this.renderIcon()   }
-                { this.renderTextFieldOrArea() }
+                { this.renderFields() }
                 { this.renderInputLabel() }
                 { this.renderHelperLabel() }
             </div>
@@ -103,4 +110,14 @@ class InputField extends Component{
     }
 }
 
+
+InputField.propTypes = {
+    textAreaProps: PropTypes.object,
+    textFieldProps: PropTypes.object,
+    SelectFieldProps: PropTypes.object,
+    classNames: PropTypes.arrayOf(PropTypes.string)
+}
+
+
 export default InputField;
+

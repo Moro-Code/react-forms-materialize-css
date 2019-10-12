@@ -39,3 +39,5 @@ SelectOption.propTypes = {
     default: PropTypes.bool,
     placeholder: PropTypes.bool
 }
+
+export default SelectOption;
