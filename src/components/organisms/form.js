@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import InputField from "../molecules/inputfield";
-import SubmitButton from "../atoms/submitbutton";
+import SubmitButton from "../molecules/submitbutton";
 import M from "materialize-css"
 class Form extends Component{
     constructor(props){

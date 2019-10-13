@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types"
 
 class Icon extends Component{
 
@@ -11,6 +12,15 @@ class Icon extends Component{
             </i>
         )
     }
+}
+Icon.defaultProps = {
+    right: false,
+    left: false
+}
+Icon.propTypes = {
+    icon: PropTypes.string.isRequired,
+    right: PropTypes.bool,
+    left: PropTypes.bool
 }
 
 export default Icon;

@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types"
 
 class HelperText extends Component{
 
@@ -13,4 +14,9 @@ class HelperText extends Component{
     }
 }
 
+HelperText.propTypes = {
+    dataError: PropTypes.string,
+    dataSuccess: PropTypes.string,
+    helperTextText: PropTypes.string.isRequired
+}
 export default HelperText;

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import Icon from "./icon";
+import PropTypes from "prop-types";
+import Icon from "../atoms/icon";
 
 
 class SubmitButton extends Component{
@@ -55,4 +56,17 @@ class SubmitButton extends Component{
     }
 }
 
+SubmitButton.propTypes = {
+    elementProps: PropTypes.object,
+    classNames: PropTypes.arrayOf(
+        PropTypes.string
+    ),
+    name: PropTypes.string,
+    text: PropTypes.string, 
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    icon: PropTypes.string,
+    iconRight: PropTypes.bool,
+    iconLeft: PropTypes.bool
+}
 export default SubmitButton;
