@@ -1,13 +1,19 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 import TextField from "../atoms/textfield";
 import TextArea from "../atoms/textarea";
 import Icon from "../atoms/icon";
 import InputLabel from "../atoms/inputlabel";
 import HelperText from "../atoms/helpertext";
+import SelectField from "../atoms/selectfield";
+/*
+TODO:
+- restructure such that multiple components can be added not just text input and area
+*/
 class InputField extends Component{
     constructor(props){
         super(props)
-        this.renderTextFieldOrArea = this.renderTextFieldOrArea.bind(this)
+        this.renderFields = this.renderFields.bind(this)
         this.getClassNames = this.getClassNames.bind(this)
         this.renderIcon = this.renderIcon.bind(this)
         this.renderInputLabel = this.renderInputLabel.bind(this)
@@ -41,13 +47,12 @@ class InputField extends Component{
 
     }
 
-    renderTextFieldOrArea(){
+    renderFields(){
         // conditional rendering function of either a TextArea component or a TextField component based on the textAreaProps or textFieldProps
         if (this.props.textAreaProps){
             return (
                 <TextArea elementProps = {this.props.textAreaProps}
                             disabled = {this.props.disabled}
-                            value = {this.props.value}
                             onChange = {this.props.onChange}>
                 </TextArea>
             )
@@ -56,10 +61,33 @@ class InputField extends Component{
             return (
                 <TextField elementProps = {this.props.textFieldProps} 
                                disabled = {this.props.disabled}
-                               value = {this.props.value}
                                onChange = {this.props.onChange}>
                 </TextField>
             )
+        }
+        else if (this.props.selectFieldProps){
+            //  remove placeholder
+            // not a valid select element html protocol
+            // destruct for deep copy
+            let selectFieldProps = {...this.props.selectFieldProps}
+            let placeholder = selectFieldProps["placeholder"]
+
+            let multi = selectFieldProps["multi"]
+
+            delete selectFieldProps["placeholder"]
+            delete selectFieldProps["default"]
+            delete selectFieldProps["multi"]
+            return (
+                <SelectField elementProps = {selectFieldProps}
+                             disabled = {this.props.disabled}
+                             options = {this.props.options}
+                             placeholder =  {placeholder}
+                             onChange = {this.props.onChange}
+                             multi = {multi}>
+                    
+                </SelectField>
+            )
+            
         }
         throw new Error("textAreaProps nor textFieldProps provided")
     }
@@ -91,7 +119,7 @@ class InputField extends Component{
         return (
             <div className = {`col input-field${this.getClassNames !== ''? ' ' + this.getClassNames(): this.getClassNames()}`}>
                 { this.renderIcon()   }
-                { this.renderTextFieldOrArea() }
+                { this.renderFields() }
                 { this.renderInputLabel() }
                 { this.renderHelperLabel() }
             </div>
@@ -99,4 +127,22 @@ class InputField extends Component{
     }
 }
 
+
+InputField.propTypes = {
+    textAreaProps: PropTypes.object,
+    textFieldProps: PropTypes.object,
+    selectFieldProps: PropTypes.object,
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    options: PropTypes.arrayOf(PropTypes.string),
+    icon: PropTypes.string,
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    labelText: PropTypes.string,
+    helperTextText: PropTypes.string,
+    dataSuccess: PropTypes.string,
+    dataError: PropTypes.string,
+    default: PropTypes.string
+}
+
+
 export default InputField;
+

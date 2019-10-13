@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import InputField from "../molecules/inputfield";
-import SubmitButton from "../atoms/submitbutton";
+import SubmitButton from "../molecules/submitbutton";
 import M from "materialize-css"
 class Form extends Component{
     constructor(props){
@@ -68,6 +68,7 @@ class Form extends Component{
         for (let row in formJson){
             row = formJson[row]
             for (let field in row){     
+                
                 if (typeof names[field] !== "undefined"){
                    throw new Error(`A field with name ${field} has been encountered but the name already exists in the form ${names[field]}`)
                 }
@@ -77,21 +78,32 @@ class Form extends Component{
                 
                 let fieldObj = row[field]
 
-                if (field !== "submit" && ("textFieldProps" in fieldObj || "textAreaProps" in fieldObj) ){
+                let textFieldBool = "textFieldProps" in fieldObj
+                let selectFieldBool = "selectFieldProps" in fieldObj
+                let textAreaBool = "textAreaProps" in fieldObj
+
+                let dontSkip = textAreaBool || selectFieldBool || textFieldBool
+
+                if (field !== "submit" && dontSkip){
                     // adding the name of the field to the lower level component props
-                    if ("textFieldProps" in fieldObj){
-                        fieldObj["textFieldProps"]["name"] = field
+                    
+                    if (textFieldBool){
+                        fieldObj["textFieldProps"]["name"] = field 
                     }
-                    else {
+                    else if (selectFieldBool){
+                        fieldObj["selectFieldProps"]["name"] = field
+                    }
+                    else if (textAreaBool){
                         fieldObj["textAreaProps"]["name"] = field
                     }
 
+
                     // creating the state key value which will store the value of the field
                     this.setState(
-                        {[`${field}Value`] : fieldObj["value"] ? fieldObj["value"]: ""}
+                        {[`${field}Value`] : fieldObj["default"] ? fieldObj["default"]: ""}
                     )
                     // creating the state key which will store whether field is disabled
-                    if (typeof fieldObj["disabled"] === "undefined" || fieldObj["disabled"] === false || fieldObj["disabled"] === "false"){
+                    if (typeof fieldObj["disabled"] === "undefined" || fieldObj["disabled"] == "false"){
                         this.setState(
                             {[`${field}Disabled`] :false}
                         )
@@ -158,7 +170,7 @@ class Form extends Component{
                 let comp;
 
                 // handle if the field is free text based whether thats a text area or text field 
-                if (name !== "submit" && ("textFieldProps" in fieldObj || "textAreaProps" in fieldObj)){
+                if (name !== "submit" && ("textFieldProps" in fieldObj || "textAreaProps" in fieldObj || "selectFieldProps" in fieldObj)){
                     // onchange function to update the state
                     let onchangefunc
                     // custom onChange functions mapped to field component names 
@@ -191,6 +203,7 @@ class Form extends Component{
                             this.setState(
                                 {[`${event.target.name}Value`]: event.target.value}
                             )
+                            console.log(event.target.value)
                         }
                     }
                     // register the onchange function for the particular field and bind this

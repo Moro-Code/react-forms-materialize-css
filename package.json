@@ -59,6 +59,7 @@
     "dist"
   ],
   "dependencies": {
-    "materialize-css": "^1.0.0"
+    "materialize-css": "^1.0.0",
+    "prop-types": "^15.7.2"
   }
 }

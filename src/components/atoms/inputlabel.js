@@ -3,6 +3,7 @@ Atom component for an input field label
 */
 
 import React, {Component} from "react"
+import PropTypes from "prop-types"
 
 class InputLabel extends Component {
     render(){
@@ -12,4 +13,8 @@ class InputLabel extends Component {
     }
 }
 
+InputLabel.propTypes = {
+    for: PropTypes.string,
+    labelText: PropTypes.string.isRequired
+}
 export default InputLabel;
