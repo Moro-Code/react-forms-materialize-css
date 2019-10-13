@@ -53,7 +53,6 @@ class InputField extends Component{
             return (
                 <TextArea elementProps = {this.props.textAreaProps}
                             disabled = {this.props.disabled}
-                            value = {this.props.value}
                             onChange = {this.props.onChange}>
                 </TextArea>
             )
@@ -62,7 +61,6 @@ class InputField extends Component{
             return (
                 <TextField elementProps = {this.props.textFieldProps} 
                                disabled = {this.props.disabled}
-                               value = {this.props.value}
                                onChange = {this.props.onChange}>
                 </TextField>
             )
@@ -70,18 +68,22 @@ class InputField extends Component{
         else if (this.props.selectFieldProps){
             //  remove placeholder
             // not a valid select element html protocol
-            let placeholder = this.props.selectFieldProps["placeholder"]
-            let defaultValue = this.props.selectFieldProps["default"]
+            // destruct for deep copy
+            let selectFieldProps = {...this.props.selectFieldProps}
+            let placeholder = selectFieldProps["placeholder"]
 
-            delete this.props.selectFieldProps["placeholder"]
-            delete this.props.selectFieldProps["default"]
+            let multi = selectFieldProps["multi"]
+
+            delete selectFieldProps["placeholder"]
+            delete selectFieldProps["default"]
+            delete selectFieldProps["multi"]
             return (
-                <SelectField elementProps = {this.props.selectFieldProps}
+                <SelectField elementProps = {selectFieldProps}
                              disabled = {this.props.disabled}
                              options = {this.props.options}
-                             default = {defaultValue}
                              placeholder =  {placeholder}
-                            >
+                             onChange = {this.props.onChange}
+                             multi = {multi}>
                     
                 </SelectField>
             )
@@ -129,11 +131,11 @@ class InputField extends Component{
 InputField.propTypes = {
     textAreaProps: PropTypes.object,
     textFieldProps: PropTypes.object,
-    SelectFieldProps: PropTypes.object,
+    selectFieldProps: PropTypes.object,
     classNames: PropTypes.arrayOf(PropTypes.string),
-    options: PropTypes.string,
+    options: PropTypes.arrayOf(PropTypes.string),
     icon: PropTypes.string,
-    classNames: PropTypes.string,
+    classNames: PropTypes.arrayOf(PropTypes.string),
     labelText: PropTypes.string,
     helperTextText: PropTypes.string,
     dataSuccess: PropTypes.string,

@@ -7,7 +7,6 @@ class TextArea extends Component{
             <textarea {...this.props.elementProps} 
                    disabled = {this.props.disabled} 
                    className = "materialize-textarea"
-                   value = {this.props.value}
                    onChange = {this.props.onChange}
             >
                 {this.props.children}

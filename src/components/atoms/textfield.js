@@ -10,7 +10,6 @@ class TextField extends Component {
             <input {...this.props.elementProps} 
                    disabled = {this.props.disabled} 
                    className = "validate"
-                   value = {this.props.value}
                    onChange = {this.props.onChange}       
             > 
               {this.props.children}        

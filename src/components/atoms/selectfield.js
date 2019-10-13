@@ -1,32 +1,36 @@
 import React, {Component} from "react"
 import SelectOption from "./selectoption"
 import PropTypes from "prop-types"
+import M from "materialize-css"
 
 class SelectField extends Component{
     constructor(props){
+        super(props)
         this.renderOptions = this.renderOptions.bind(this)
+        this.state = {
+            interacted: false
+        }
+        this.select = React.createRef()
+    }
+    componentDidMount(){
+        this.select.current.id = this.props.elementProps["id"]
+        let instance = document.getElementById(this.props.elementProps["id"])
+        M.FormSelect.init(instance)
+        this.select.current.id = this.props.elementProps["id"]
+        this.select.current.name = this.props.elementProps["name"]
     }
     renderOptions(){
         // render the options from the array
-        // defining needed variables
-        let data = this.props.options
-        let defaultValue = this.props.defaultValue
+        // defining needed variables        let data = this.props.options
         let placeholder = this.props.placeholder
+        let data = this.props.options
         let renderedOptions = []
         
         // two cases placeholder exists or default value does 
         if (typeof placeholder !== "undefined"){
             renderedOptions.push(
-                <SelectOption placeholder = {true}
-                              value = {placeholder}>
+                <SelectOption  placeholder = {true} value = {placeholder}>
                 </SelectOption>
-            )
-        }
-        else if (typeof this.props.defaultValue !== "undefined"){
-            renderedOptions.push(
-            <SelectOption default = {true}
-                          value = {defaultValue}>
-            </SelectOption>
             )
         }
         for (let i in data){
@@ -39,21 +43,25 @@ class SelectField extends Component{
     }
     
     render(){
-
         if (this.props.multi === false){ 
             return (
-                <select {...this.elementProps} 
+                <select {...this.elementProps}
+                        placeholder = {this.props.placeholder} 
                         onChange = {this.props.onChange}
-                        disabled = {this.props.disabled}>
+                        disabled = {this.props.disabled}
+                        ref = {this.select}>
                     {this.renderOptions()}
                 </select>
             )
         }
         else if (this.props.multi === true){
             return (
-                <select 
-                    multiple {...this.elementProps}
+                <select
+                   {...this.elementProps}
+                    placeholder = {this.props.placeholder}
+                    multiple = {true} {...this.elementProps}
                     disabled = {this.props.disabled}
+                    ref = {this.select}
                 >
                     {this.renderOptions()}
                 </select>
@@ -71,7 +79,7 @@ SelectField.propTypes = {
         PropTypes.string
     ).isRequired,
     placeholder: PropTypes.string,
-    defaultValue: PropTypes.default,
+    defaultValue: PropTypes.string,
     elementProps: PropTypes.object,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
