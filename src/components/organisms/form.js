@@ -9,6 +9,7 @@ class Form extends Component{
         this.state = {
             dataLoaded: false
         }
+        this.fetchFormData = this.fetchFormData.bind(this)
         this.fetchFormData(props.formDataFileName).then(
             this.loadState
         )
@@ -29,37 +30,20 @@ class Form extends Component{
            from the /public/forms/ directory. If the file does not exist or does
            not load an error will be thrown 
         */
-        let status = response => {
-            // resolves or rejects promise based on whether or not file loads 
-            if (response.status === 200){
-                // if the status is OK resolve the promise otherwise reject 
-                return Promise.resolve(response)
-            }
-            return Promise.reject(new Error(response.statusText))
-        }
 
-        let json = response => {
-            // return a resolved promise with the data 
-            return  Promise.resolve(response.json());
-        }
-
-        let formData
-
-        await fetch(`forms/${formDataFileName}`).then(
-            status
-         ).then(
-            json
-         ).then(
-             // assign data to formJson param
-             (data) => {
-                 formData = data
-             }
-         ).catch( error => {
-             // if there is an error, throw it 
-             throw error
-         })
+        let response = await fetch(`forms/${formDataFileName}`)
         
-        return formData
+        if (response.status === 200) {
+            return response.json()
+        }
+        else {
+            console.log(response)
+            this.setState(
+                {
+                    error: true 
+                }
+            )
+        } 
     }
 
     loadState(formJson){
@@ -264,6 +248,13 @@ class Form extends Component{
            in the state, or load a preloader component to let the user know the form is loading */
         if (this.state.dataLoaded){
             return this.renderHTML(this.formJson)
+        }
+        else if (this.state.error === true){
+            return (
+                <h3>
+                    Something went wrong ! Check the console for more details.
+                </h3>
+            )
         }
         else {
             return(
