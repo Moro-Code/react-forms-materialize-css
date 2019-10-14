@@ -6,8 +6,8 @@ class HelperText extends Component{
     render(){
         return(
             <span className="helper-text"
-                  dataerror= {this.props.dataError}
-                  datasuccess={this.props.dataSuccess}>
+                  data-error= {this.props.dataError}
+                  data-success={this.props.dataSuccess}>
                 {this.props.helperTextText}
             </span>
         )
